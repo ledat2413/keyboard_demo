@@ -1,16 +1,26 @@
-# keyboard_demo
+# Flutter Custom Keyboard
 
-A new Flutter project.
+Dự án Flutter này minh họa cách xây dựng **Custom Keyboard** và **3 TabView** (Grammar / Translate / Paraphrasing) theo giao diện giống ứng dụng thực tế, sử dụng **Provider** và kiến trúc sạch (**Clean Architecture**).
 
-## Getting Started
+## ✨ Tính năng
 
-This project is a starting point for a Flutter application.
+- **3 Tab chính**:
+  - **Grammar**: Kiểm tra ngữ pháp, hiển thị thông báo và nút "Open Keyboard".
+  - **Translate**: Danh sách ngôn ngữ với flag/icon.
+  - **Paraphrasing**: Danh sách tone/style để biến đổi câu văn.
+- **Custom Keyboard**:
+  - QWERTY hoặc bàn phím số (Number Keyboard).
+  - Giao diện có thể tùy chỉnh màu sắc, kích thước, icon.
+- **Clean Architecture + Provider**:
+  - Chia tách `data`, `domain`, `presentation`.
+  - `ChangeNotifier` để quản lý state.
+  - `UseCase` cho xử lý logic.
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠 Công nghệ sử dụng
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Flutter](https://flutter.dev) (>=3.0)
+- [Provider](https://pub.dev/packages/provider)
+- Clean Architecture
+- Dart null safety
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
