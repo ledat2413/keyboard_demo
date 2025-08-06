@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:keyboard_demo/presentation/widgets/three_tabview.dart';
 import 'package:provider/provider.dart';
 import 'presentation/providers/keyboard_provider.dart';
 import 'presentation/widgets/custom_keyboard.dart';
@@ -36,12 +37,9 @@ class KeyboardDemoPage extends StatefulWidget {
 }
 
 class _KeyboardDemoPageState extends State<KeyboardDemoPage> {
-  final FocusNode _focusNode = FocusNode();
-
   @override
   void initState() {
     super.initState();
-    // prevent default system keyboard from popping by not focusing a real TextField
   }
 
   @override
@@ -54,7 +52,6 @@ class _KeyboardDemoPageState extends State<KeyboardDemoPage> {
       body: SafeArea(
         child: Column(
           children: [
-            // Display area for result text that the custom keyboard edits
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Container(
@@ -73,7 +70,6 @@ class _KeyboardDemoPageState extends State<KeyboardDemoPage> {
               ),
             ),
             const Spacer(),
-            // attach keyboard at bottom
             const Divider(color: Colors.white24),
             const CustomKeyboard(),
           ],

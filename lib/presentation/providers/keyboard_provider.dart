@@ -9,11 +9,19 @@ class KeyboardProvider extends ChangeNotifier {
 
   String _text = '';
   int _cursor = 0;
+  KeyType typeMode = KeyType.charMode;
 
   KeyboardProvider(this._usecase, this._repo);
 
   String get text => _text;
   int get cursor => _cursor;
+
+  void selectTab(KeyType tab) {
+    onKeyPressed(KeyButton(label: '', type: tab));
+    if (typeMode == tab) return;
+    typeMode = tab;
+    notifyListeners();
+  }
 
   void setCursor(int pos) {
     _cursor = pos.clamp(0, _text.length);
@@ -36,21 +44,47 @@ class KeyboardProvider extends ChangeNotifier {
       _toggleEmojiPicker();
       return;
     }
-    if (key.type == KeyType.mode) {
-      _toggleTopMode(key.label);
-      return;
-    }
 
     if (key.type == KeyType.backspace) {
       if (_cursor > 0) {
-        _text = _text.substring(0, _cursor - 1) + _text.substring(_cursor);
-        _cursor--;
+        final chars = _text.characters;
+        final before = chars.take(_cursor - 1).toString();
+        final after = chars.skip(_cursor).toString();
+        _text = before + after;
+        _cursor = before.characters.length;
       }
       notifyListeners();
       return;
     }
 
-    // default insertion via usecase
+    if (key.type == KeyType.numberMode) {
+      typeMode = KeyType.numberMode;
+      notifyListeners();
+      return;
+    }
+    if (key.type == KeyType.charMode) {
+      typeMode = KeyType.charMode;
+      notifyListeners();
+      return;
+    }
+
+    if (key.type == KeyType.grammarMode) {
+      typeMode = KeyType.grammarMode;
+      notifyListeners();
+      return;
+    }
+
+    if (key.type == KeyType.translateMode) {
+      typeMode = KeyType.translateMode;
+      notifyListeners();
+      return;
+    }
+    if (key.type == KeyType.paraphrasingMode) {
+      typeMode = KeyType.paraphrasingMode;
+      notifyListeners();
+      return;
+    }
+
     _text = _usecase.call(
       currentText: _text,
       cursorPosition: _cursor,
@@ -64,22 +98,15 @@ class KeyboardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // stubs - expand these
   void _handleMic() {
-    // simulate toggling voice recording
     // ignore: avoid_print
-    print('Mic action');
+    debugPrint('Mic action');
   }
 
   void _toggleEmojiPicker() {
-    // show emoji picker...
+    typeMode = KeyType.emoji;
     // ignore: avoid_print
-    print('Toggle emoji');
-  }
-
-  void _toggleTopMode(String label) {
-    // handle grammar/translate/paraphrasing chips tap
-    // ignore: avoid_print
-    print('Top mode tapped: $label');
+    debugPrint('Toggle emoji');
+    notifyListeners();
   }
 }

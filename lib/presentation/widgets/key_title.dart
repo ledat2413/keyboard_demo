@@ -10,13 +10,13 @@ class KeyTile extends StatelessWidget {
   final bool isSpecial;
 
   const KeyTile({
-    Key? key,
+    super.key,
     required this.child,
     required this.onTap,
-    this.width = 30,
+    this.width = 31,
     this.height = 38,
     this.isSpecial = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
